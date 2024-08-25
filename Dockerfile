@@ -11,7 +11,7 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 # Install necessary Python packages
-RUN pip3 install fastapi uvicorn transformers torch==2.0.1+cu118 requests --extra-index-url https://download.pytorch.org/whl/cu118
+RUN pip3 install -r requirements.txt
 
 # Copy the application code
 COPY ./app /app
@@ -19,8 +19,9 @@ COPY ./app /app
 # Set the working directory
 WORKDIR /app
 
-# Copy the performance test script
+# Copy the performance test script and requirements file
 COPY ./performance_test.py /app/performance_test.py
+COPY ./requirements.txt /app/requirements.txt
 
 # Expose the application port
 EXPOSE 8000
